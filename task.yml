@@ -1,0 +1,24 @@
+---
+groups:
+- name: buildstack
+  jobs:
+  - prepare-bbl-resources
+
+resources:
+- name: bbl-bosh
+  type: git
+  source:
+    branch: master
+    uri: https://github.com/cagiti/bbl-bosh.git
+- name: buildstack-boshrelease
+  type: git
+  source:
+    branch: master
+    uri: https://github.com/cagiti/buildstack-boshrelease.git
+
+jobs:
+- name: prepare-bbl-resources
+  plan:
+  - get: bbl-bosh
+  - get: buildstack-boshrelease
+    trigger: true
